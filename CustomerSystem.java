@@ -54,7 +54,7 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo() {
+    public static String enterCustomerInfo(String name, String city, String postalCode, String credNum) {
     }
     /*
     * This method may be edited to achieve the task however you like.
