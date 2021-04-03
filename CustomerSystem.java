@@ -69,7 +69,51 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(){
+    public static boolean validateCreditCard(String creditCard){
+        int length = creditCard.length();
+        String reversedCard = "";
+        for (int i =0; i < length; i++){
+            int position = length - 1 - i; 
+            char characterAtPosition = creditCard.charAt(position);
+            reversedCard += characterAtPosition; 
+        }
+        System.out.println(reversedCard);
+        int sum1 = 0;  
+        for (int i = 0; i < length; i+=2){
+            char oddNumber = reversedCard.charAt(i);
+            int oddNumberInteger = Character.getNumericValue(oddNumber);
+            sum1 += oddNumberInteger;
+        }
+        System.out.println(sum1);
+        int sum2 = 0;
+        for(int j = 1; j < length; j+=2){
+            char evenNumber = reversedCard.charAt(j);
+            int evenNumberInteger = Character.getNumericValue(evenNumber);
+            int doubledEven = evenNumberInteger *2;
+            int remainderValue =0;
+            int tenthDigit=0;
+            if (doubledEven > 9){
+                remainderValue = doubledEven%10;  
+                tenthDigit = doubledEven/10; 
+                int partialSum = tenthDigit+remainderValue;
+                sum2 += partialSum;
+                System.out.println("Remainder: " + remainderValue);
+                System.out.println("Tenth:" + tenthDigit);
+                System.out.println("Partia: " + partialSum); 
+            }
+            else{
+                sum2 += doubledEven;
+            }   
+        }
+        System.out.println(sum2);
+        if (((sum2 + sum1)%10) ==0){
+            System.out.println("Valid Credit Card");
+            return true;
+        }
+        else{
+            System.out.println("Invalid Credit Card");
+            return false;
+        }
     }
     /*
     * This method may be edited to achieve the task however you like.
