@@ -17,7 +17,12 @@ class CustomerSystem{
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-
+	String firstName = "";
+        String cityName = "";
+        String lastName = "";
+        String creditCard ="";
+        String postalCode ="";
+        int customerID = 0;
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -26,7 +31,17 @@ class CustomerSystem{
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		// Any necessary variables may be added to this if section, but nowhere else in the code
-                enterCustomerInfo();
+		System.out.print("Customer First Name: " );
+		firstName = reader.nextLine();
+		System.out.print("Customer Last Name: ");
+                lastName = reader.nextLine();
+                System.out.print("Customer City: ");
+                cityName= reader.nextLine();
+                System.out.print("Customer Credit Card: ");
+                creditCard= reader.nextLine();
+                System.out.print("Customer Postal Code: ");
+                postalCode= reader.nextLine();
+                enterCustomerInfo(creditCard, postalCode);
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -55,7 +70,13 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo() {
+    public static int enterCustomerInfo(String creditCard, String postalCode, int customerIDNumber) {
+        boolean validCredit = validateCreditCard(creditCard);
+        boolean validPostal = validatePostalCode(postalCode);
+        if ((validCredit && validPostal) == true){
+            customerIDNumber +=1;
+            return customerIDNumber;
+        } 
     }
     /*
     * This method may be edited to achieve the task however you like.
