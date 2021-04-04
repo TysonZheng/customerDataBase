@@ -72,6 +72,8 @@ class CustomerSystem{
 		System.out.print("Customer Credit Card: ");
         	creditCard= reader.nextLine();
 		validCard = validCreditCard(creditCard)
+		if (validCard ==false){
+			
 	}
 	while (!validPostal){
 		System.out.print("Customer Postal Code: ");
@@ -121,14 +123,12 @@ class CustomerSystem{
             char characterAtPosition = creditCard.charAt(position);
             reversedCard += characterAtPosition; 
         }
-        System.out.println(reversedCard);
         int sum1 = 0;  
         for (int i = 0; i < length; i+=2){
             char oddNumber = reversedCard.charAt(i);
             int oddNumberInteger = Character.getNumericValue(oddNumber);
             sum1 += oddNumberInteger;
         }
-        System.out.println(sum1);
         int sum2 = 0;
         for(int j = 1; j < length; j+=2){
             char evenNumber = reversedCard.charAt(j);
@@ -141,15 +141,12 @@ class CustomerSystem{
                 tenthDigit = doubledEven/10; 
                 int partialSum = tenthDigit+remainderValue;
                 sum2 += partialSum;
-                System.out.println("Remainder: " + remainderValue);
-                System.out.println("Tenth:" + tenthDigit);
-                System.out.println("Partia: " + partialSum); 
             }
             else{
                 sum2 += doubledEven;
             }   
         }
-        System.out.println(sum2);
+        
         if (((sum2 + sum1)%10) ==0){
             System.out.println("Valid Credit Card");
             return true;
