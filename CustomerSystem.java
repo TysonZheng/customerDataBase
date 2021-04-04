@@ -71,8 +71,13 @@ class CustomerSystem{
 	while (!validCard){
 		System.out.print("Customer Credit Card: ");
         	creditCard= reader.nextLine();
-		validCard = validCreditCard(creditCard)
+		validCard = validCreditCard(creditCard);
 		if (validCard ==false){
+			System.out.println("Invalid Credit Card Information. Please enter again.");
+		}
+		else{
+			System.out.println("Valid Credit Card Information.");
+		}
 			
 	}
 	while (!validPostal){
@@ -148,11 +153,9 @@ class CustomerSystem{
         }
         
         if (((sum2 + sum1)%10) ==0){
-            System.out.println("Valid Credit Card");
             return true;
         }
         else{
-            System.out.println("Invalid Credit Card");
             return false;
         }
     }
