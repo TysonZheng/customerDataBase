@@ -70,9 +70,22 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static int enterCustomerInfo(String creditCard, String postalCode, int customerIDNumber) {
-        boolean validCredit = validateCreditCard(creditCard);
-        boolean validPostal = validatePostalCode(postalCode);
+    public static void enterCustomerInfo() {
+        validateCreditCard(creditcard);
+	validatePostalCode(postalCode); 
+	 System.out.print("Customer First Name: " );
+	String firstName = reader.nextLine();
+	System.out.print("Customer Last Name: ");
+	String  lastName = reader.nextLine();
+                System.out.print("Customer City: ");
+       	String  cityName= reader.nextLine();
+        
+	    System.out.print("Customer Credit Card: ");
+        String  creditCard= reader.nextLine();
+                System.out.print("Customer Postal Code: ");
+        String  postalCode= reader.nextLine();
+                
+           
         if ((validCredit && validPostal) == true){
             customerIDNumber +=1;
             return customerIDNumber;
