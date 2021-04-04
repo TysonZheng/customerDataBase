@@ -67,12 +67,14 @@ class CustomerSystem{
 	String  lastName = reader.nextLine();
 	System.out.print("Customer City: ");
        	String  cityName= reader.nextLine();
-	while (validCard == false){
-		System.out.print("Customer Credit Card: ");
+	
+	System.out.print("Customer Credit Card: ");
+	while (!validCard){
+		System.out.print("Invalid Credit Card Number, Try again: ");
         	creditCard= reader.nextLine();
 		validCard = validCreditCard(creditCard)
 	}
-	while (validPostal ==false){
+	while (!validPostal){
 		System.out.print("Customer Postal Code: ");
         	postalCode= reader.nextLine();
 		validPostal = validatePostalCode(postalCode);
