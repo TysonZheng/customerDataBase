@@ -77,6 +77,7 @@ class CustomerSystem{
 		}
 		else{
 			System.out.println("Valid Credit Card Information.");
+			validCard = true;
 		}
 			
 	}
