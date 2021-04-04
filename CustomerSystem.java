@@ -63,12 +63,30 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void validatePostalCode(){
+     BufferedReader reader;
+        try {
+            reader = new BufferedReader(new FileReader("postal_codes.csv"));
+            String line = reader.readLine();
+            String format = "";
+    
+            while(line!=null) {
+                line = reader.readLine();
+                if(line == null) {
+                    break;
+                }
+                format = line.substring(0, 3);
+                if(postalcode.equalsIgnoreCase(format)) {
+                    reader.close();
+                    return true;
+                } 
+            }
+            reader.close();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
     public static boolean validateCreditCard(String creditCard){
         int length = creditCard.length();
         String reversedCard = "";
