@@ -68,9 +68,8 @@ class CustomerSystem{
 	System.out.print("Customer City: ");
        	String  cityName= reader.nextLine();
 	
-	System.out.print("Customer Credit Card: ");
 	while (!validCard){
-		System.out.print("Invalid Credit Card Number, Try again: ");
+		System.out.print("Customer Credit Card: ");
         	creditCard= reader.nextLine();
 		validCard = validCreditCard(creditCard)
 	}
