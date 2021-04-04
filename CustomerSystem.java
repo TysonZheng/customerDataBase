@@ -17,11 +17,6 @@ class CustomerSystem{
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-	String firstName = "";
-        String cityName = "";
-        String lastName = "";
-        String creditCard ="";
-        String postalCode ="";
         int customerID = 0;
 
         do{
@@ -31,17 +26,8 @@ class CustomerSystem{
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		// Any necessary variables may be added to this if section, but nowhere else in the code
-		System.out.print("Customer First Name: " );
-		firstName = reader.nextLine();
-		System.out.print("Customer Last Name: ");
-                lastName = reader.nextLine();
-                System.out.print("Customer City: ");
-                cityName= reader.nextLine();
-                System.out.print("Customer Credit Card: ");
-                creditCard= reader.nextLine();
-                System.out.print("Customer Postal Code: ");
-                postalCode= reader.nextLine();
-                enterCustomerInfo(creditCard, postalCode);
+		
+                enterCustomerInfo();
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -71,21 +57,26 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void enterCustomerInfo() {
-        validateCreditCard(creditcard);
-	validatePostalCode(postalCode); 
-	 System.out.print("Customer First Name: " );
+	String creditCard = "";
+	String postalCode = "";
+        boolean validCard = validateCreditCard(creditCard);
+	boolean validPostal = validatePostalCode(postalCode); 
+	System.out.print("Customer First Name: " );
 	String firstName = reader.nextLine();
 	System.out.print("Customer Last Name: ");
 	String  lastName = reader.nextLine();
-                System.out.print("Customer City: ");
+	System.out.print("Customer City: ");
        	String  cityName= reader.nextLine();
-        
-	    System.out.print("Customer Credit Card: ");
-        String  creditCard= reader.nextLine();
-                System.out.print("Customer Postal Code: ");
-        String  postalCode= reader.nextLine();
-                
-           
+	while (validCard == false){
+		System.out.print("Customer Credit Card: ");
+        	creditCard= reader.nextLine();
+		validCard = validCreditCard(creditCard)
+	}
+	while (validPostal ==false){
+		System.out.print("Customer Postal Code: ");
+        	postalCode= reader.nextLine();
+		validPostal = validatePostalCode(postalCode);
+	}        
         if ((validCredit && validPostal) == true){
             customerIDNumber +=1;
             return customerIDNumber;
