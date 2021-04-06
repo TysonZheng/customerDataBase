@@ -85,6 +85,14 @@ class CustomerSystem{
 		System.out.print("Customer Postal Code: ");
         	postalCode= reader.nextLine();
 		validPostal = validatePostalCode(postalCode);
+		
+		if (validPostal ==false){
+			System.out.println("Invalid Postal Code Information. Please enter again.");
+		}
+		else{
+			System.out.println("Valid Postal Code Information.");
+			validCard = true;
+		}
 	}        
         if ((validCredit && validPostal) == true){
             customerIDNumber +=1;
