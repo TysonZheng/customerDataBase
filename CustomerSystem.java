@@ -24,14 +24,11 @@ class CustomerSystem{
             userInput = reader.nextLine();                  // User selection from the menu
 
             if (userInput.equals(enterCustomerOption)){
-                // Only the line below may be editted based on the parameter list and how you design the method return
-		// Any necessary variables may be added to this if section, but nowhere else in the code
-		
-                enterCustomerInfo();
+                info = enterCustomerInfo();
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
-                generateCustomerDataFile();
+                generateCustomerDataFile(info);
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -57,10 +54,14 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void enterCustomerInfo() {
+	Scanner reader = new Scanner(System.in);
+	    
 	String creditCard = "";
 	String postalCode = "";
-        boolean validCard = validateCreditCard(creditCard);
+        
+	boolean validCard = validateCreditCard(creditCard);
 	boolean validPostal = validatePostalCode(postalCode); 
+	
 	System.out.print("Customer First Name: " );
 	String firstName = reader.nextLine();
 	System.out.print("Customer Last Name: ");
@@ -96,10 +97,10 @@ class CustomerSystem{
                 postalCode = reader.nextLine();
             }
         }      
-        if ((validCredit && validPostal) == true){
-            customerIDNumber +=1;
-            return customerIDNumber;
-        } 
+        String concat = fullName+"|"+cityName+"|"+creditCard+"|"+postalCode;
+        
+        reader.close();
+        return concat;
     }
     /*
     * This method may be edited to achieve the task however you like.
