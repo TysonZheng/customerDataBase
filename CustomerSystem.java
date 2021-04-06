@@ -3,7 +3,7 @@
 
 
 
-import java.util.Scanner;
+import java.util.*
 import java.io.*;
 // More packages may be imported in the space below
 
@@ -81,19 +81,21 @@ class CustomerSystem{
 		}
 			
 	}
-	while (!validPostal){
-		System.out.print("Customer Postal Code: ");
-        	postalCode= reader.nextLine();
-		validPostal = validatePostalCode(postalCode);
-		
-		if (validPostal ==false){
-			System.out.println("Invalid Postal Code Information. Please enter again.");
-		}
-		else{
-			System.out.println("Valid Postal Code Information.");
-			validCard = true;
-		}
-	}        
+	while(!validpostal) {
+            System.out.print("Customer Postal Code: ");
+            postalCode = reader.nextLine();
+            boolean validp = validatePostalCode(postalCode);
+            if(validp == true) {
+                System.out.println("Valid Postal Code");
+                validpostal = true;
+            } else if(postalCode.length()<3) {
+                System.out.println("Invalid postal code, try again: ");
+                postalCode = reader.nextLine();
+            } else {
+                System.out.println("Invalid postal code, try again: ");
+                postalCode = reader.nextLine();
+            }
+        }      
         if ((validCredit && validPostal) == true){
             customerIDNumber +=1;
             return customerIDNumber;
@@ -104,12 +106,13 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validatePostalCode(){
-     BufferedReader reader;
+     public static boolean validatePostalCode(String postalcode){
+        BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader("postal_codes.csv"));
             String line = reader.readLine();
             String format = "";
+            String pformat = postalcode.substring(0, 3);
     
             while(line!=null) {
                 line = reader.readLine();
@@ -117,7 +120,7 @@ class CustomerSystem{
                     break;
                 }
                 format = line.substring(0, 3);
-                if(postalcode.equalsIgnoreCase(format)) {
+                if(pformat.equalsIgnoreCase(format)) {
                     reader.close();
                     return true;
                 } 
@@ -168,15 +171,15 @@ class CustomerSystem{
             return false;
         }
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
-    public static void generateCustomerDataFile(String name, String city, String postalCode, String credNum){
-	    
+    
+    public static void generateCustomerDataFile(String concatn){
+        try {
+            FileWriter myWriter = new FileWriter("customerDataFile.csv", true);
+            myWriter.write(concatn+"\n");
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
-    /*******************************************************************
-    *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
-    *******************************************************************/
 }
