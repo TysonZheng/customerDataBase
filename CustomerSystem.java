@@ -12,12 +12,12 @@ class CustomerSystem{
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
         String userInput, enterCustomerOption, generateCustomerOption, exitCondition;
+	String info = "";
         enterCustomerOption = "1";
         generateCustomerOption = "2";
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-        int customerID = 0;
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -53,7 +53,7 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo() {
+    public static String enterCustomerInfo() {
 	Scanner reader = new Scanner(System.in);
 	    
 	String creditCard = "";
@@ -66,6 +66,7 @@ class CustomerSystem{
 	String firstName = reader.nextLine();
 	System.out.print("Customer Last Name: ");
 	String  lastName = reader.nextLine();
+	String fullName = firstName+" "+lastName;
 	System.out.print("Customer City: ");
        	String  cityName= reader.nextLine();
 	
@@ -82,13 +83,13 @@ class CustomerSystem{
 		}
 			
 	}
-	while(!validpostal) {
+	while(!validPostal) {
             System.out.print("Customer Postal Code: ");
             postalCode = reader.nextLine();
             boolean validp = validatePostalCode(postalCode);
             if(validp == true) {
                 System.out.println("Valid Postal Code");
-                validpostal = true;
+                validPostal = true;
             } else if(postalCode.length()<3) {
                 System.out.println("Invalid postal code, try again: ");
                 postalCode = reader.nextLine();
