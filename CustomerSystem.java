@@ -97,7 +97,7 @@ class CustomerSystem{
                 System.out.println("Invalid postal code, try again. ");
             }
         }      
-        String concat = fullName+"|"+cityName+"|"+creditCard+"|"+postalCode;
+        String concat = fullName+","+cityName+","+creditCard+","+postalCode;
         
         reader.close();
         return concat;
