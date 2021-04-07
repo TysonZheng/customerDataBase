@@ -130,7 +130,11 @@ class CustomerSystem{
         }
     }
     public static boolean validateCreditCard(String creditCard){
+        String creditCard = creditCardNumber.replaceAll("\\s", "");
         int length = creditCard.length();
+        if (length <9 ){
+            return false;
+        }
         String reversedCard = "";
         for (int i =0; i < length; i++){
             int position = length - 1 - i; 
