@@ -16,13 +16,16 @@ class CustomerSystem{
         
 
         // More variables for the main may be declared in the space below
+	String info="";
+        int customerID =1;
 
         do{
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
             
             if (userInput.equals(enterCustomerOption)){
-                info = enterCustomerInfo();
+                info = enterCustomerInfo(customerID);
+                customerID +=1;
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
