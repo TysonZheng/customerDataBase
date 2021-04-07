@@ -98,7 +98,7 @@ public class customerDataBase {
         String fullName = firstName +" "+ lastName;
         String concat = fullName+"|"+cityName+"|"+creditCard+"|"+postalCode;
         
-        reader.close();
+        
         return concat;
     }
     /*
