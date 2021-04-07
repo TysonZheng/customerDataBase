@@ -94,8 +94,7 @@ class CustomerSystem{
                 System.out.println("Invalid postal code, try again: ");
                 postalCode = reader.nextLine();
             } else {
-                System.out.println("Invalid postal code, try again: ");
-                postalCode = reader.nextLine();
+                System.out.println("Invalid postal code, try again. ");
             }
         }      
         String concat = fullName+"|"+cityName+"|"+creditCard+"|"+postalCode;
