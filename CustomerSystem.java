@@ -10,22 +10,21 @@ class CustomerSystem{
         String enterCustomerOption, generateCustomerOption, exitCondition;
         String userInput = "";
         String info = "";
+        int customerId = 1;
         enterCustomerOption = "1";
         generateCustomerOption = "2";
         exitCondition = "9";
         
 
         // More variables for the main may be declared in the space below
-	String info="";
-        int customerID =1;
 
         do{
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
             
             if (userInput.equals(enterCustomerOption)){
-                info = enterCustomerInfo(customerID);
-                customerID +=1;
+                info = enterCustomerInfo(customerId);
+                customerId++;
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
@@ -54,7 +53,7 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static String enterCustomerInfo() {
+    public static String enterCustomerInfo(int customerIdNum) {
 	Scanner reader = new Scanner(System.in);
 	    
 	String creditCard = "";
@@ -97,7 +96,7 @@ class CustomerSystem{
                 System.out.println("Invalid postal code, try again. ");
             }
         }      
-        String concat = fullName+","+cityName+","+creditCard+","+postalCode;
+        String concat = customerIdNum+" "+fullName+","+cityName+","+creditCard+","+postalCode;
         
         return concat;
     }
@@ -132,10 +131,10 @@ class CustomerSystem{
             return false;
         }
     }
-    public static boolean validateCreditCard(String creditCard){
+    public static boolean validateCreditCard(String creditCardNumber){
         String creditCard = creditCardNumber.replaceAll("\\s", "");
         int length = creditCard.length();
-        if (length <9 ){
+        if (length < 9) {
             return false;
         }
         String reversedCard = "";
