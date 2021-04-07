@@ -171,17 +171,6 @@ public class customerDataBase {
             return false;
         }
     }
-    
-    public static void generateCustomerDataFile(String concatn){
-        try {
-            FileWriter myWriter = new FileWriter("customerDataFile.csv", true);
-            myWriter.write(concatn+"\n");
-            myWriter.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
 }
 
 
