@@ -1,23 +1,21 @@
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
 
-
-
 import java.util.*;
 import java.io.*;
 // More packages may be imported in the space below
+public class customerDataBase {
 
-class CustomerSystem{
     public static void main(String[] args){
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
         String userInput, enterCustomerOption, generateCustomerOption, exitCondition;
-	String info = "";
         enterCustomerOption = "1";
         generateCustomerOption = "2";
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
+        String info="";
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -54,50 +52,51 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static String enterCustomerInfo() {
-	Scanner reader = new Scanner(System.in);
-	    
-	String creditCard = "";
-	String postalCode = "";
+        Scanner reader = new Scanner(System.in);
+            
+        String creditCard = " ";
+        String postalCode = " ";
+            
+        boolean validCard = validateCreditCard(creditCard);
+        boolean validPostal = validatePostalCode(postalCode); 
         
-	boolean validCard = validateCreditCard(creditCard);
-	boolean validPostal = validatePostalCode(postalCode); 
-	
-	System.out.print("Customer First Name: " );
-	String firstName = reader.nextLine();
-	System.out.print("Customer Last Name: ");
-	String  lastName = reader.nextLine();
-	String fullName = firstName+" "+lastName;
-	System.out.print("Customer City: ");
-       	String  cityName= reader.nextLine();
-	
-	while (!validCard){
-		System.out.print("Customer Credit Card: ");
-        	creditCard= reader.nextLine();
-		validCard = validCreditCard(creditCard);
-		if (validCard ==false){
-			System.out.println("Invalid Credit Card Information. Please enter again.");
-		}
-		else{
-			System.out.println("Valid Credit Card Information.");
-			validCard = true;
-		}
-			
-	}
-	while(!validPostal) {
+        System.out.print("Customer First Name: " );
+        String firstName = reader.nextLine();
+        System.out.print("Customer Last Name: ");
+        String  lastName = reader.nextLine();
+        System.out.print("Customer City: ");
+        String  cityName= reader.nextLine();
+        
+        while (!validCard){
+            System.out.print("Customer Credit Card: ");
+            creditCard= reader.nextLine();
+            validCard = validateCreditCard(creditCard);
+            if (validCard ==false){
+                System.out.println("Invalid Credit Card Information. Please enter again.");
+            }
+            else{
+                System.out.println("Valid Credit Card Information.");
+                validCard = true;
+            }
+                
+        }
+        while(!validPostal) {
             System.out.print("Customer Postal Code: ");
             postalCode = reader.nextLine();
-            boolean validp = validatePostalCode(postalCode);
-            if(validp == true) {
+            validPostal= validatePostalCode(postalCode);
+            if(validPostal == true) {
                 System.out.println("Valid Postal Code");
                 validPostal = true;
             } else if(postalCode.length()<3) {
                 System.out.println("Invalid postal code, try again: ");
                 postalCode = reader.nextLine();
             } else {
-                System.out.println("Invalid postal code, try again. ");
+                System.out.println("Invalid postal code, try again: ");
+                postalCode = reader.nextLine();
             }
-        }      
-        String concat = fullName+","+cityName+","+creditCard+","+postalCode;
+        }  
+        String fullName = firstName +" "+ lastName;
+        String concat = fullName+"|"+cityName+"|"+creditCard+"|"+postalCode;
         
         reader.close();
         return concat;
@@ -172,6 +171,21 @@ class CustomerSystem{
             return false;
         }
     }
+    
+    public static void generateCustomerDataFile(String concatn){
+        try {
+            FileWriter myWriter = new FileWriter("customerDataFile.csv", true);
+            myWriter.write(concatn+"\n");
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
     
     public static void generateCustomerDataFile(String concatn){
         try {
