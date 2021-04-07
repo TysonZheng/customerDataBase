@@ -1,26 +1,26 @@
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
-
-
 import java.util.*;
 import java.io.*;
 // More packages may be imported in the space below
-public class customerDataBase {
 
+class CustomerSystem{
     public static void main(String[] args){
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
-        String userInput, enterCustomerOption, generateCustomerOption, exitCondition;
+        String enterCustomerOption, generateCustomerOption, exitCondition;
+        String userInput = "";
+        String info = "";
         enterCustomerOption = "1";
         generateCustomerOption = "2";
         exitCondition = "9";
+        
 
         // More variables for the main may be declared in the space below
-        String info="";
 
         do{
             printMenu();                                    // Printing out the main menu
             userInput = reader.nextLine();                  // User selection from the menu
-
+            
             if (userInput.equals(enterCustomerOption)){
                 info = enterCustomerInfo();
             }
@@ -33,7 +33,7 @@ public class customerDataBase {
             }
 
         } while (!userInput.equals(exitCondition));         // Exits once the user types 
-
+        reader.close();
         System.out.println("Program Terminated");
     }
     public static void printMenu(){
@@ -52,52 +52,49 @@ public class customerDataBase {
     * This method may also be broken down further depending on your algorithm
     */
     public static String enterCustomerInfo() {
-        Scanner reader = new Scanner(System.in);
-            
-        String creditCard = " ";
-        String postalCode = " ";
-            
-        boolean validCard = validateCreditCard(creditCard);
-        boolean validPostal = validatePostalCode(postalCode); 
+	Scanner reader = new Scanner(System.in);
+	    
+	String creditCard = "";
+	String postalCode = "";
         
-        System.out.print("Customer First Name: " );
-        String firstName = reader.nextLine();
-        System.out.print("Customer Last Name: ");
-        String  lastName = reader.nextLine();
-        System.out.print("Customer City: ");
-        String  cityName= reader.nextLine();
-        
-        while (!validCard){
-            System.out.print("Customer Credit Card: ");
-            creditCard= reader.nextLine();
-            validCard = validateCreditCard(creditCard);
-            if (validCard ==false){
-                System.out.println("Invalid Credit Card Information. Please enter again.");
-            }
-            else{
-                System.out.println("Valid Credit Card Information.");
-                validCard = true;
-            }
-                
-        }
-        while(!validPostal) {
+	boolean validCard = false;
+	boolean validPostal = false;
+	
+	System.out.print("Customer First Name: " );
+	String firstName = reader.nextLine();
+	System.out.print("Customer Last Name: ");
+	String  lastName = reader.nextLine();
+	String fullName = firstName+" "+lastName;
+    System.out.print("Customer City: ");
+    String  cityName= reader.nextLine();
+	
+	while (!validCard){
+		System.out.print("Customer Credit Card: ");
+        creditCard= reader.nextLine();
+		validCard = validateCreditCard(creditCard);
+		if (validCard ==false){
+			System.out.println("Invalid Credit Card Information. Please enter again.");
+		}
+		else{
+			System.out.println("Valid Credit Card Information.");
+			validCard = true;
+		}
+			
+	}
+	while(!validPostal) {
             System.out.print("Customer Postal Code: ");
             postalCode = reader.nextLine();
-            validPostal= validatePostalCode(postalCode);
-            if(validPostal == true) {
-                System.out.println("Valid Postal Code");
+
+            if(postalCode.length() < 3) {
+                System.out.println("Invalid postal code, try again. ");
+            } else if(validatePostalCode(postalCode)==true) {
+                System.out.println("Valid postal code, try again: ");
                 validPostal = true;
-            } else if(postalCode.length()<3) {
-                System.out.println("Invalid postal code, try again: ");
-                postalCode = reader.nextLine();
             } else {
-                System.out.println("Invalid postal code, try again: ");
-                postalCode = reader.nextLine();
+                System.out.println("Invalid postal code, try again. ");
             }
-        }  
-        String fullName = firstName +" "+ lastName;
-        String concat = fullName+"|"+cityName+"|"+creditCard+"|"+postalCode;
-        
+        }      
+        String concat = fullName+","+cityName+","+creditCard+","+postalCode;
         
         return concat;
     }
@@ -171,10 +168,6 @@ public class customerDataBase {
             return false;
         }
     }
-
-
-
-
     
     public static void generateCustomerDataFile(String concatn){
         try {
