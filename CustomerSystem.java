@@ -36,12 +36,14 @@ class CustomerSystem {
             } else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you
                 // design the method return
-                if(customerId==2) {
+                if (customerId == 2) {
                     fileDecision = returnFile(fileGen, customerId);
                     System.out.println("Press 1 to create customer data in relative path\n2 to create file to specific path: ");
                     decision = reader.nextInt();
-                    System.out.println("Enter the filepath you wish by typing the dir separated by '/'");
-                    filePath = reader.next();
+                    if(decision==2){
+                        System.out.println("Enter the filepath you wish by typing the dir separated by '/'");
+                        filePath = reader.next();
+                    }
                 }
                 generateCustomerDataFile(infoData, fileDecision, decision, filePath);
             } else {
@@ -274,9 +276,8 @@ class CustomerSystem {
      */
     public static void generateCustomerDataFile(String concatn, String fileName, int decision, String filePath) {
         try {
-            Scanner reader = new Scanner(System.in);
             // Creates file for users
-            if(decision==1){
+            if (decision == 1) {
                 File customerData = new File(fileName + ".csv");
                 FileWriter myWriter = new FileWriter(customerData, true);
                 // Writes the information into the new file
@@ -284,7 +285,7 @@ class CustomerSystem {
                 // Closes files
                 myWriter.close();
             } else {
-                File customerData = new File(filePath, fileName+".csv");
+                File customerData = new File(filePath, fileName + ".csv");
                 FileWriter myWriter = new FileWriter(customerData, true);
                 // Writes the information into the new file
                 myWriter.write(concatn + "\n");
@@ -297,7 +298,7 @@ class CustomerSystem {
             e.printStackTrace();
         }
     }
-    
+
     public static String returnFile(String fileName, int id) {
         Scanner reader = new Scanner(System.in);
         // Gets the file name from user
