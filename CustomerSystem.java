@@ -69,9 +69,9 @@ class CustomerSystem {
      * passed into a variable in main called info. The method will call on other
      * methods to validate postal code and credit card once the uer has inputted
      * values for those categories.
-     * 
+     *
+     * @author: Tyson 
      * @parameter: customerIDNum (The ID assigned for every customer)
-     * 
      * @return: concat (ID, First Name, Last Name, City Name, Credit Card, Postal
      * Code)
      */
@@ -190,8 +190,8 @@ class CustomerSystem {
      * and is a number following the Luhn Algorithm It will be placed in a while
      * loop, reprompting for the credit card number if the method return false.
      * 
+     * @author: Tyson 
      * @parameter: creditCardNumber (User input from enterCustomerInfo)
-     * 
      * @return: boolean expression (True or False: if the credit card number is
      * valid or not)
      */
