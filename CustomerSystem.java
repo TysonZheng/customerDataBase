@@ -59,7 +59,7 @@ class CustomerSystem {
      */
     public static String enterCustomerInfo(int customerIdNum) {
         // Initializes Scanner
-        Scanner reader = new Scanner(System.in);
+        Scanner enter = new Scanner(System.in);
         // Initializes variables for method
         String creditCard = "";
         String postalCode = "";
@@ -68,19 +68,19 @@ class CustomerSystem {
         boolean validPostal = false;
         // Ask user for name and city which do not require checks
         System.out.print("Customer First Name: ");
-        String firstName = reader.nextLine();
+        String firstName = enter.nextLine();
         System.out.print("Customer Last Name: ");
-        String lastName = reader.nextLine();
+        String lastName = enter.nextLine();
         // Concatenates first name and last name to a full name for ease of programming
         String fullName = firstName + " " + lastName;
         System.out.print("Customer City: ");
-        String cityName = reader.nextLine();
+        String cityName = enter.nextLine();
         // Validates credit card in a while loop
         // Calls the method validateCreditCard to check is the credit card is correct
         while (!validCard) {
             // Ask user for input
             System.out.print("Customer Credit Card: ");
-            creditCard = reader.nextLine();
+            creditCard = enter.nextLine();
             // Validates the credit card by calling method
             validCard = validateCreditCard(creditCard);
             if (validCard == false) {
@@ -98,7 +98,7 @@ class CustomerSystem {
         while (!validPostal) {
             // Ask user for input
             System.out.print("Customer Postal Code: ");
-            postalCode = reader.nextLine();
+            postalCode = enter.nextLine();
             // Validates the credit card by calling method
             if (postalCode.length() < 3) {
                 // Continues loop when the user inputted a postal code less than 3
@@ -112,8 +112,7 @@ class CustomerSystem {
                 System.out.println("Invalid postal code, try again. ");
             }
         }
-        //Closes reader
-        reader.close();
+        enter.close();
         // Returns concatenated string of all the information
         String informationForGenerate = customerIdNum + ". " + fullName + "," + cityName + "," + creditCard + ","+ postalCode;
         return informationForGenerate;
@@ -249,7 +248,7 @@ class CustomerSystem {
      * string in the format (ID, First Name, Last Name, City Name, Credit Card, Postal Code)
      * 
      * @parameter: concatn (A concatenated string of the information from main)
-     * @parameter: id (The customer ID from main used for different prompts)
+     * @parameter: customerCounter (The customer ID from main used for different prompts)
      * @return: void
      */
     public static void generateCustomerDataFile(String concatn, int customerCounter) {
