@@ -12,12 +12,16 @@ class CustomerSystem {
         String enterCustomerOption, generateCustomerOption, exitCondition;
         String userInput = "";
         String infoData = "";
+        String fileGen = "";
+        String fileDecision = "";
+        String filePath = "";
+        int customerId = 1;
+        int decision = 0;
         enterCustomerOption = "1";
         generateCustomerOption = "2";
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-        int customerId = 1;
 
         do {
             printMenu(); // Printing out the main menu
@@ -26,11 +30,20 @@ class CustomerSystem {
             if (userInput.equals(enterCustomerOption)) {
                 // Calling method enterCustomerInfo passing through the customer ID
                 infoData = enterCustomerInfo(customerId);
-                // Adding 1 to customer ID everytime there has been a successful entry of customer info
+                // Adding 1 to customer ID everytime there has been a successful entry of
+                // customer info
                 customerId++;
             } else if (userInput.equals(generateCustomerOption)) {
-                // Only the line below may be editted based on the parameter list and how you design the method return
-                generateCustomerDataFile(infoData, customerId);
+                // Only the line below may be editted based on the parameter list and how you
+                // design the method return
+                if(customerId==2) {
+                    fileDecision = returnFile(fileGen, customerId);
+                    System.out.println("Press 1 to create customer data in relative path\n2 to create file to specific path: ");
+                    decision = reader.nextInt();
+                    System.out.println("Enter the filepath you wish by typing the dir separated by '/'");
+                    filePath = reader.next();
+                }
+                generateCustomerDataFile(infoData, fileDecision, decision, filePath);
             } else {
                 System.out.println("Please type in a valid option (A number from 1-9)");
             }
@@ -48,18 +61,20 @@ class CustomerSystem {
     }
 
     /*
-     * Method Name (Tyson): enterCustomerInfo 
-     * Description: The user is able to enter the customer's information which then is concatenated into a single string to be
+     * Method Name: enterCustomerInfo Description: The user is able to enter the
+     * customer's information which then is concatenated into a single string to be
      * passed into a variable in main called info. The method will call on other
      * methods to validate postal code and credit card once the uer has inputted
      * values for those categories.
      * 
-     * @parameter: customerIDNum (The ID assigned for every customer from main)
-     * @return: concat (ID, First Name, Last Name, City Name, Credit Card, Postal Code)
+     * @parameter: customerIDNum (The ID assigned for every customer)
+     * 
+     * @return: concat (ID, First Name, Last Name, City Name, Credit Card, Postal
+     * Code)
      */
     public static String enterCustomerInfo(int customerIdNum) {
         // Initializes Scanner
-        Scanner enter = new Scanner(System.in);
+        Scanner reader = new Scanner(System.in);
         // Initializes variables for method
         String creditCard = "";
         String postalCode = "";
@@ -68,19 +83,19 @@ class CustomerSystem {
         boolean validPostal = false;
         // Ask user for name and city which do not require checks
         System.out.print("Customer First Name: ");
-        String firstName = enter.nextLine();
+        String firstName = reader.nextLine();
         System.out.print("Customer Last Name: ");
-        String lastName = enter.nextLine();
+        String lastName = reader.nextLine();
         // Concatenates first name and last name to a full name for ease of programming
         String fullName = firstName + " " + lastName;
         System.out.print("Customer City: ");
-        String cityName = enter.nextLine();
+        String cityName = reader.nextLine();
         // Validates credit card in a while loop
         // Calls the method validateCreditCard to check is the credit card is correct
         while (!validCard) {
             // Ask user for input
             System.out.print("Customer Credit Card: ");
-            creditCard = enter.nextLine();
+            creditCard = reader.nextLine();
             // Validates the credit card by calling method
             validCard = validateCreditCard(creditCard);
             if (validCard == false) {
@@ -98,7 +113,7 @@ class CustomerSystem {
         while (!validPostal) {
             // Ask user for input
             System.out.print("Customer Postal Code: ");
-            postalCode = enter.nextLine();
+            postalCode = reader.nextLine();
             // Validates the credit card by calling method
             if (postalCode.length() < 3) {
                 // Continues loop when the user inputted a postal code less than 3
@@ -112,21 +127,24 @@ class CustomerSystem {
                 System.out.println("Invalid postal code, try again. ");
             }
         }
-        enter.close();
         // Returns concatenated string of all the information
-        String informationForGenerate = customerIdNum + ". " + fullName + "," + cityName + "," + creditCard + ","+ postalCode;
+        String informationForGenerate = customerIdNum + ". " + fullName + "," + cityName + "," + creditCard + ","
+                + postalCode;
         return informationForGenerate;
 
     }
 
     /*
-     * Method Name (Morgan): validatePostalCode 
-     * Description: The method is called on by enterCustomerInfo which will pass through the user's input for postal code.
+     * Method Name: validatePostalCode Description: The method is called on by
+     * enterCustomerInfo which will pass through the user's input for postal code.
      * This method will check from the postal codes provided, whether or not the
-     * postal codes exist in the Postal Code CSV file It will be placed in a while loop, reprompting for the postal code.
+     * postal codes exist in the Postal Code CSV file It will be placed in a while
+     * loop, reprompting for the postal code.
      * 
      * @parameter: postalCode (User input from enterCustomerInfo)
-     * @return: boolean expression (True or False: if the postal code is valid or not)
+     * 
+     * @return: boolean expression (True or False: if the postal code is valid or
+     * not)
      */
     public static boolean validatePostalCode(String postalcode) {
         // Initialize BufferedReader
@@ -163,13 +181,14 @@ class CustomerSystem {
     }
 
     /*
-     * Method Name (Tyson): validateCreditCard 
-     * Description: The method is called on by enterCustomerInfo which will pass through the user's input for creditCard
+     * Method Name: validateCreditCard Description: The method is called on by
+     * enterCustomerInfo which will pass through the user's input for creditCard
      * This method will check if the credit card number is a number greater than 9
      * and is a number following the Luhn Algorithm It will be placed in a while
      * loop, reprompting for the credit card number if the method return false.
      * 
      * @parameter: creditCardNumber (User input from enterCustomerInfo)
+     * 
      * @return: boolean expression (True or False: if the credit card number is
      * valid or not)
      */
@@ -242,41 +261,51 @@ class CustomerSystem {
     }
 
     /*
-     * Method Name (Morgan): generateCustomerDataFile 
-     * Description: The method is called from the main method when the user wants to the customer information to a CSV file. 
-     * This method uses FileWriter and inputs the variable concatn which was the information from enterCustomerInfo It will open a seperate file with a
-     * string in the format (ID, First Name, Last Name, City Name, Credit Card, Postal Code)
+     * Method Name: generateCustomerDataFile Description: The method is called from
+     * the main method when the user wants to the customer information to a CSV
+     * file. This method uses FileWriter and inputs the variable concatn which was
+     * the information from enterCustomerInfo It will open a seperate file with a
+     * string in the format (ID, First Name, Last Name, City Name, Credit Card,
+     * Postal Code)
      * 
      * @parameter: concatn (A concatenated string of the information from main)
-     * @parameter: customerCounter (The customer ID from main used for different prompts)
+     * 
      * @return: void
      */
-    public static void generateCustomerDataFile(String concatn, int customerCounter) {
+    public static void generateCustomerDataFile(String concatn, String fileName, int decision, String filePath) {
         try {
             Scanner reader = new Scanner(System.in);
-            String fileName = "";
-            // Gets the file name from user when customerCounter is equal to 2
-            if(customerCounter==2) {
-                //Prompt user for file name
-                System.out.print("New File Name: ");
-                fileName = reader.nextLine();
+            // Creates file for users
+            if(decision==1){
+                File customerData = new File(fileName + ".csv");
+                FileWriter myWriter = new FileWriter(customerData, true);
+                // Writes the information into the new file
+                myWriter.write(concatn + "\n");
+                // Closes files
+                myWriter.close();
             } else {
-                //Prompts the user to re-enter a file name they generated 
-                System.out.print("Name of file you wish to add customer information to: ");
-                fileName = reader.nextLine();
+                File customerData = new File(filePath, fileName+".csv");
+                FileWriter myWriter = new FileWriter(customerData, true);
+                // Writes the information into the new file
+                myWriter.write(concatn + "\n");
+                // Closes files
+                myWriter.close();
             }
-            // Makes new files
-            FileWriter myWriter = new FileWriter(fileName + ".csv", true);
-            // Writes the information into the new file
-            myWriter.write(concatn + "\n");
-            // Closes files
-            myWriter.close();
             // Catches errors and prints an error message
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
-
         }
-
+    }
+    
+    public static String returnFile(String fileName, int id) {
+        Scanner reader = new Scanner(System.in);
+        // Gets the file name from user
+        if (id == 2) {
+            System.out.print("File Name: ");
+            fileName = reader.nextLine();
+        }
+        return fileName;
     }
 }
+
