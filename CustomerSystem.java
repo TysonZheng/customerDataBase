@@ -5,7 +5,7 @@ import java.util.*;
 import java.io.*;
 // More packages may be imported in the space below
 
-class CustomerSystem {
+class customerSystem {
     public static void main(String[] args) {
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
