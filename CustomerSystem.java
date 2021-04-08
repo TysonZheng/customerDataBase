@@ -112,6 +112,8 @@ class CustomerSystem {
                 System.out.println("Invalid postal code, try again. ");
             }
         }
+        //Closes reader
+        reader.close();
         // Returns concatenated string of all the information
         String informationForGenerate = customerIdNum + ". " + fullName + "," + cityName + "," + creditCard + ","+ postalCode;
         return informationForGenerate;
