@@ -37,10 +37,11 @@ class CustomerSystem {
                 // Only the line below may be editted based on the parameter list and how you
                 // design the method return
                 if (customerId == 2) {
-                    fileDecision = returnFile(fileGen, customerId);
-                    System.out.println("Press 1 to create customer data in relative path\n2 to create file to specific path: ");
+                    fileDecision = returnFileName(fileGen, customerId);
+                    System.out.println(
+                            "Press 1 to create customer data in relative path\n2 to create file to specific path: ");
                     decision = reader.nextInt();
-                    if(decision==2){
+                    if (decision == 2) {
                         System.out.println("Enter the filepath you wish by typing the dir separated by '/'");
                         filePath = reader.next();
                     }
@@ -299,7 +300,17 @@ class CustomerSystem {
         }
     }
 
-    public static String returnFile(String fileName, int id) {
+    /*
+     * Method Name: returnFileName
+     * Description: The method is called on by
+     * main when user chooses 2 
+     * This method prevents fileName being prompted everytime user selects 2
+     * 
+     * @parameter: fileName and id from main
+     * @return: String fileName that shows the name of the file user wants to make
+     * 
+     */
+    public static String returnFileName(String fileName, int id) {
         Scanner reader = new Scanner(System.in);
         // Gets the file name from user
         if (id == 2) {
@@ -309,4 +320,3 @@ class CustomerSystem {
         return fileName;
     }
 }
-
