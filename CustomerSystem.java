@@ -12,12 +12,12 @@ class CustomerSystem {
         String enterCustomerOption, generateCustomerOption, exitCondition;
         String userInput = "";
         String infoData = "";
-        int customerId = 1;
         enterCustomerOption = "1";
         generateCustomerOption = "2";
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
+        int customerId = 1;
 
         do {
             printMenu(); // Printing out the main menu
@@ -26,12 +26,10 @@ class CustomerSystem {
             if (userInput.equals(enterCustomerOption)) {
                 // Calling method enterCustomerInfo passing through the customer ID
                 infoData = enterCustomerInfo(customerId);
-                // Adding 1 to customer ID everytime there has been a successful entry of
-                // customer info
+                // Adding 1 to customer ID everytime there has been a successful entry of customer info
                 customerId++;
             } else if (userInput.equals(generateCustomerOption)) {
-                // Only the line below may be editted based on the parameter list and how you
-                // design the method return
+                // Only the line below may be editted based on the parameter list and how you design the method return
                 generateCustomerDataFile(infoData, customerId);
             } else {
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -50,16 +48,14 @@ class CustomerSystem {
     }
 
     /*
-     * Method Name: enterCustomerInfo Description: The user is able to enter the
-     * customer's information which then is concatenated into a single string to be
+     * Method Name (Tyson): enterCustomerInfo 
+     * Description: The user is able to enter the customer's information which then is concatenated into a single string to be
      * passed into a variable in main called info. The method will call on other
      * methods to validate postal code and credit card once the uer has inputted
      * values for those categories.
      * 
-     * @parameter: customerIDNum (The ID assigned for every customer)
-     * 
-     * @return: concat (ID, First Name, Last Name, City Name, Credit Card, Postal
-     * Code)
+     * @parameter: customerIDNum (The ID assigned for every customer from main)
+     * @return: concat (ID, First Name, Last Name, City Name, Credit Card, Postal Code)
      */
     public static String enterCustomerInfo(int customerIdNum) {
         // Initializes Scanner
@@ -117,23 +113,19 @@ class CustomerSystem {
             }
         }
         // Returns concatenated string of all the information
-        String informationForGenerate = customerIdNum + ". " + fullName + "," + cityName + "," + creditCard + ","
-                + postalCode;
+        String informationForGenerate = customerIdNum + ". " + fullName + "," + cityName + "," + creditCard + ","+ postalCode;
         return informationForGenerate;
 
     }
 
     /*
-     * Method Name: validatePostalCode Description: The method is called on by
-     * enterCustomerInfo which will pass through the user's input for postal code.
+     * Method Name (Morgan): validatePostalCode 
+     * Description: The method is called on by enterCustomerInfo which will pass through the user's input for postal code.
      * This method will check from the postal codes provided, whether or not the
-     * postal codes exist in the Postal Code CSV file It will be placed in a while
-     * loop, reprompting for the postal code.
+     * postal codes exist in the Postal Code CSV file It will be placed in a while loop, reprompting for the postal code.
      * 
      * @parameter: postalCode (User input from enterCustomerInfo)
-     * 
-     * @return: boolean expression (True or False: if the postal code is valid or
-     * not)
+     * @return: boolean expression (True or False: if the postal code is valid or not)
      */
     public static boolean validatePostalCode(String postalcode) {
         // Initialize BufferedReader
@@ -170,14 +162,13 @@ class CustomerSystem {
     }
 
     /*
-     * Method Name: validateCreditCard Description: The method is called on by
-     * enterCustomerInfo which will pass through the user's input for creditCard
+     * Method Name (Tyson): validateCreditCard 
+     * Description: The method is called on by enterCustomerInfo which will pass through the user's input for creditCard
      * This method will check if the credit card number is a number greater than 9
      * and is a number following the Luhn Algorithm It will be placed in a while
      * loop, reprompting for the credit card number if the method return false.
      * 
      * @parameter: creditCardNumber (User input from enterCustomerInfo)
-     * 
      * @return: boolean expression (True or False: if the credit card number is
      * valid or not)
      */
@@ -250,27 +241,27 @@ class CustomerSystem {
     }
 
     /*
-     * Method Name: generateCustomerDataFile Description: The method is called from
-     * the main method when the user wants to the customer information to a CSV
-     * file. This method uses FileWriter and inputs the variable concatn which was
-     * the information from enterCustomerInfo It will open a seperate file with a
-     * string in the format (ID, First Name, Last Name, City Name, Credit Card,
-     * Postal Code)
+     * Method Name (Morgan): generateCustomerDataFile 
+     * Description: The method is called from the main method when the user wants to the customer information to a CSV file. 
+     * This method uses FileWriter and inputs the variable concatn which was the information from enterCustomerInfo It will open a seperate file with a
+     * string in the format (ID, First Name, Last Name, City Name, Credit Card, Postal Code)
      * 
      * @parameter: concatn (A concatenated string of the information from main)
-     * 
+     * @parameter: id (The customer ID from main used for different prompts)
      * @return: void
      */
-    public static void generateCustomerDataFile(String concatn, int id) {
+    public static void generateCustomerDataFile(String concatn, int customerCounter) {
         try {
             Scanner reader = new Scanner(System.in);
             String fileName = "";
-            // Gets the file name from user
-            if(id==2) {
-                System.out.print("File Name: ");
+            // Gets the file name from user when customerCounter is equal to 2
+            if(customerCounter==2) {
+                //Prompt user for file name
+                System.out.print("New File Name: ");
                 fileName = reader.nextLine();
             } else {
-                System.out.print("File you wish the data is added to: ");
+                //Prompts the user to re-enter a file name they generated 
+                System.out.print("Name of file you wish to add customer information to: ");
                 fileName = reader.nextLine();
             }
             // Makes new files
