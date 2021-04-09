@@ -3,14 +3,14 @@
  * Name: Tyson Zheng & Morgan Sun
  * Teacher: Mr.Ho
  * Description: Luhn Algorithm Assignment, uses 5 methods that builds on the provided main. 
- * */
+*/
 
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 import java.util.*;
 import java.io.*;
 // More packages may be imported in the space below
 
-class CustomerSystem {
+class customerSystem {
     public static void main(String[] args) {
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
@@ -149,8 +149,8 @@ class CustomerSystem {
      * postal codes exist in the Postal Code CSV file It will be placed in a while
      * loop, reprompting for the postal code.
      * 
+     * @author: Morgan
      * @parameter: postalCode (User input from enterCustomerInfo)
-     * 
      * @return: boolean expression (True or False: if the postal code is valid or
      * not)
      */
@@ -277,7 +277,7 @@ class CustomerSystem {
      * Postal Code)
      * 
      * @parameter: concatn (A concatenated string of the information from main)
-     * 
+     * @author: Morgan
      * @return: void
      */
     public static void generateCustomerDataFile(String concatn, String fileName, int decision, String filePath) {
