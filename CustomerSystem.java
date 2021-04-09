@@ -1,6 +1,11 @@
-// Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
+/*
+ * Date: April 1, 2021
+ * Name: Tyson Zheng & Morgan Sun
+ * Teacher: Mr.Ho
+ * Description: Luhn Algorithm Assignment, uses 5 methods that builds on the provided main. 
+ * */
 
-package CustomerDataBase;
+// Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 import java.util.*;
 import java.io.*;
 // More packages may be imported in the space below
